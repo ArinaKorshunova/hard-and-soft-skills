@@ -2,25 +2,33 @@
 
 namespace SuperStringModule;
 
-public class StringManager<TObject> where TObject : struct
+public class StringManager<TObject> : IStackObject
+    where TObject : struct
 {
-    public char[] GetCharArray(SuperString<TObject> superString)
+    private readonly SuperString<TObject> _stringObject;
+    
+    public StringManager(SuperString<TObject> stringObject)
     {
-        return superString.ToCharArray();
+        _stringObject = stringObject;
     }
 
-    public string GetString(SuperString<TObject> superString)
+    public char[] GetCharArray()
     {
-        return superString.ToSuperString();
+        return _stringObject.GetCharArray();
     }
 
-    public string GetFromStart(SuperString<TObject> superString, int subStringLength)
+    public string GetString()
     {
-        return new string(superString.ToSuperString().Take(subStringLength).ToArray());
+        return _stringObject.GetString();
     }
 
-    public string GetFromEnd(SuperString<TObject> superString, int subStringLength)
+    public string GetFromStart(int subStringLength)
     {
-        return new string(superString.ToSuperString().TakeLast(subStringLength).ToArray());
+        return new string(_stringObject.GetString().Take(subStringLength).ToArray());
+    }
+
+    public string GetFromEnd(int subStringLength)
+    {
+        return new string(_stringObject.GetString().TakeLast(subStringLength).ToArray());
     }
 }

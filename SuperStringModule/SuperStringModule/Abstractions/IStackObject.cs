@@ -3,4 +3,6 @@
 public interface IStackObject
 {
     string GetString();
+    
+    char[] GetCharArray();
 }

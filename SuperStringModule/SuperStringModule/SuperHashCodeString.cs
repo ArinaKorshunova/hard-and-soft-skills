@@ -7,6 +7,10 @@ namespace SuperStringModule;
 
 public class SuperHashCodeString : SuperString<byte>
 {
+    public SuperHashCodeString(string customString) : base(customString) { }
+    
+    public SuperHashCodeString(char customString) : base(customString) { }
+    
     public Encoding Encoding { get; set; } = Encoding.Unicode;
 
     protected override ImmutableArray<byte> GetValueFromString(string customString)
@@ -21,12 +25,12 @@ public class SuperHashCodeString : SuperString<byte>
         return Encoding.GetBytes(new[] {customChar}).ToImmutableArray();
     }
 
-    public override char[] ToCharArray()
+    protected override char[] ToCharArray()
     {
         return Encoding.GetChars(Value.ToArray());
     }
 
-    public override string ToSuperString()
+    protected override string ToSuperString()
     {
         return new string(Encoding.GetChars(Value.ToArray()));
     }

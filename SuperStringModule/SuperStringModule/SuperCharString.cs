@@ -6,6 +6,10 @@ namespace SuperStringModule;
 
 public class SuperCharString : SuperString<char>
 {
+    public SuperCharString(string customString) : base(customString) { }
+    
+    public SuperCharString(char customString) : base(customString) { }
+    
     protected override ImmutableArray<char> GetValueFromString(string customString)
     {
         return string.IsNullOrEmpty(customString)
@@ -18,12 +22,12 @@ public class SuperCharString : SuperString<char>
         return new[] {customChar}.ToImmutableArray();
     }
 
-    public override char[] ToCharArray()
+    protected override char[] ToCharArray()
     {
         return Value.ToArray();
     }
 
-    public override string ToSuperString()
+    protected override string ToSuperString()
     {
         return new string(Value.ToArray());
     }

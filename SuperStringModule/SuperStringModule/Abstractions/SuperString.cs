@@ -2,7 +2,8 @@
 
 namespace SuperStringModule.Abstractions;
 
-public abstract class SuperString<TObject> where TObject : struct
+public abstract class SuperString<TObject> : IStackObject
+    where TObject : struct
 {
     protected SuperString()
     {
@@ -21,7 +22,7 @@ public abstract class SuperString<TObject> where TObject : struct
 
     protected ImmutableArray<TObject> Value { get; set; }
 
-    private int Length => Value.Length;
+    private int Length => GetString().Length;
 
     public int GetLength()
     {
@@ -32,12 +33,22 @@ public abstract class SuperString<TObject> where TObject : struct
     {
         Value = new ImmutableArray<TObject>();
     }
+    
+    public string GetString()
+    {
+        return ToSuperString();
+    }
+    
+    public char[] GetCharArray()
+    {
+        return ToCharArray();
+    }
 
     protected abstract ImmutableArray<TObject> GetValueFromString(string customString);
 
     protected abstract ImmutableArray<TObject> GetValueFromChar(char customChar);
 
-    public abstract char[] ToCharArray();
+    protected abstract char[] ToCharArray();
 
-    public abstract string ToSuperString();
+    protected abstract string ToSuperString();
 }
