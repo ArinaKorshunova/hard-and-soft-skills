@@ -1,12 +1,9 @@
-namespace TDDMicroExercises.LeaderBoard
-{
-    public class SelfDrivingCar : Driver
-    {
-        public SelfDrivingCar(string algorithmVersion, string company) : base(algorithmVersion, company)
-        {
-            AlgorithmVersion = algorithmVersion;
-        }
+namespace TDDMicroExercises.LeaderBoard;
 
-        public string AlgorithmVersion { get; set; }
+public record SelfDrivingCar(string AlgorithmVersion, string Company) : IParticipant
+{
+    public string GetName()
+    {
+        return $"Self Driving Car - {Company} ({AlgorithmVersion})";
     }
 }

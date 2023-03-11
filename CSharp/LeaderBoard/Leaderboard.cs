@@ -1,44 +1,28 @@
 using System.Collections.Generic;
+using System.Linq;
 
-namespace TDDMicroExercises.LeaderBoard
+namespace TDDMicroExercises.LeaderBoard;
+
+public class Leaderboard
 {
-    public class Leaderboard
+    private readonly List<Race> _races = new();
+
+    public Leaderboard(params Race[] races)
     {
-        private readonly List<Race> _races = new List<Race>();
+        _races.AddRange(races);
+    }
 
-        public Leaderboard(params Race[] races)
-        {
-            _races.AddRange(races);
-        }
+    public Dictionary<string, int> ParticipantsResults()
+    {
+        return _races.SelectMany(x => x.GetParticipantResults())
+            .GroupBy(x => x.Key)
+            .ToDictionary(e => e.Key, e => e.Sum(x => x.Value));
+    }
 
-        public Dictionary<string, int> DriverResults()
-        {
-            var results = new Dictionary<string, int>();
-            foreach (var race in _races)
-            {
-                foreach (var driver in race.Results)
-                {
-                    var driverName = race.GetDriverName(driver);
-                    var points = race.GetPoints(driver);
-                    if (results.ContainsKey(driverName))
-                    {
-                        results[driverName] = results[driverName] + points;
-                    }
-                    else
-                    {
-                        results.Add(driverName, 0 + points);
-                    }
-                }
-            }
-            return results;
-        }
-
-        public List<string> DriverRankings()
-        {
-            var results = DriverResults();
-            var resultsList = new List<string>(results.Keys);
-            resultsList.Sort();
-            return resultsList;
-        }
+    public List<string> ParticipantsRankings()
+    {
+        return ParticipantsResults().OrderByDescending(x => x.Value)
+            .GroupBy(x => x.Value).SelectMany(x => x.OrderBy(s => s.Key))
+            .Select(x => x.Key).ToList();
     }
 }

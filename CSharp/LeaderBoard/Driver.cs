@@ -1,33 +1,14 @@
-namespace TDDMicroExercises.LeaderBoard
+namespace TDDMicroExercises.LeaderBoard;
+
+public record Driver(string Name, string Country) : IParticipant
 {
-    public class Driver
+    public string GetName()
     {
-        public Driver(string name, string country)
-        {
-            Name = name;
-            Country = country;
-        }
+        return Name;
+    }
 
-        public string Name { get; }
-        public string Country { get; }
-
-        public override int GetHashCode()
-        {
-            return Name.GetHashCode()*31 + Country.GetHashCode();
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (this == obj)
-            {
-                return true;
-            }
-            if (!(obj is Driver))
-            {
-                return false;
-            }
-            var other = (Driver) obj;
-            return Name.Equals(other.Name) && Country.Equals(other.Country);
-        }
+    public override int GetHashCode()
+    {
+        return Name.GetHashCode() * 31 + Country.GetHashCode();
     }
 }

@@ -8,7 +8,7 @@ namespace TDDMicroExercises.LeaderBoard.Tests
         [Fact]
         public void ShouldSumThePoints()
         {
-            var results = TestData.SampleLeaderboard1.DriverResults();
+            var results = TestData.SampleLeaderboard1.ParticipantsResults();
             Assert.True(results.ContainsKey("Lewis Hamilton"));
             Assert.Equal(18 + 18 + 25, results["Lewis Hamilton"]);
         }
@@ -16,7 +16,7 @@ namespace TDDMicroExercises.LeaderBoard.Tests
         [Fact]
         public void ShouldFindTheWinner()
         {
-            Assert.Equal("Lewis Hamilton", TestData.SampleLeaderboard1.DriverRankings()[0]);
+            Assert.Equal("Lewis Hamilton", TestData.SampleLeaderboard1.ParticipantsRankings()[0]);
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace TDDMicroExercises.LeaderBoard.Tests
             var winDriver2 = new Race("Malaysian Grand Prix", TestData.Driver2, TestData.Driver1, TestData.Driver3);
             var exEquoLeaderBoard = new Leaderboard(winDriver1, winDriver2);
 
-            var rankings = exEquoLeaderBoard.DriverRankings();
+            var rankings = exEquoLeaderBoard.ParticipantsRankings();
 
             Assert.Equal(
                 new List<string> { TestData.Driver2.Name, TestData.Driver1.Name, TestData.Driver3.Name },

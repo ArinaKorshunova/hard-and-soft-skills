@@ -27,8 +27,10 @@ namespace TDDMicroExercises.LeaderBoard.Tests
             Race3 = new Race("Chinese Grand Prix", Driver2, Driver1, Driver3);
             Race4 = new Race("Fictional Grand Prix 1", Driver1, Driver2, Driver4);
             Race5 = new Race("Fictional Grand Prix 2", Driver4, Driver2, Driver1);
-            Driver4.AlgorithmVersion = "1.3";
-            Race6 = new Race("Fictional Grand Prix 3", Driver2, Driver1, Driver4);
+            // why it should be mutable?
+            //Driver4.AlgorithmVersion = "1.3";
+            var driver5 = Driver4 with {AlgorithmVersion = "1.3"};
+            Race6 = new Race("Fictional Grand Prix 3", Driver2, Driver1, driver5);
 
             SampleLeaderboard1 = new Leaderboard(Race1, Race2, Race3);
             SampleLeaderboard2 = new Leaderboard(Race4, Race5, Race6);
