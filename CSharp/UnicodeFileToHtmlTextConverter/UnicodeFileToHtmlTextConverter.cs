@@ -1,49 +1,28 @@
 using System.IO;
 
-namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter
+namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter;
+
+public record UnicodeFileToHtmlTextConverter(string FileName)
 {
-    public class UnicodeFileToHtmlTextConverter
+    private const string LineSplitter = "<br />";
+    
+    public string ConvertToHtml()
     {
-        private string _fullFilenameWithPath;
+        using TextReader unicodeFileStream = File.OpenText(FileName);
+        var html = string.Empty;
 
-        public UnicodeFileToHtmlTextConverter(string fullFilenameWithPath)
+        var line = unicodeFileStream.ReadLine();
+        while (line != null)
         {
-            _fullFilenameWithPath = fullFilenameWithPath;
+            html += ConvertLine(line);
+            line = unicodeFileStream.ReadLine();
         }
 
-        public string GetFilename()
-        {
-            return _fullFilenameWithPath;
-        }
-
-        public string ConvertToHtml()
-        {
-            using (TextReader unicodeFileStream = File.OpenText(_fullFilenameWithPath))
-            {
-                string html = string.Empty;
-
-                string line = unicodeFileStream.ReadLine();
-                while (line != null)
-                {
-                    html += HttpUtility.HtmlEncode(line);
-                    html += "<br />";
-                    line = unicodeFileStream.ReadLine();
-                }
-
-                return html;
-            }
-        }
+        return html;
     }
-    class HttpUtility
+
+    private string ConvertLine(string line)
     {
-        public static string HtmlEncode(string line)
-        {
-            line = line.Replace("<", "&lt;");
-            line = line.Replace(">", "&gt;");
-            line = line.Replace("&", "&amp;");
-            line = line.Replace("\"", "&quot;");
-            line = line.Replace("\'", "&quot;");
-            return line;
-        }
+        return HttpUtility.HtmlEncode(line) + LineSplitter;
     }
 }

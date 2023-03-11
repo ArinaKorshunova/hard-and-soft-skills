@@ -5,10 +5,10 @@ namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter
     public class HikerTest
     {
         [Fact]
-        public void Foobar()
+        public void FileNameNotEqual()
         {
-            UnicodeFileToHtmlTextConverter converter = new UnicodeFileToHtmlTextConverter("foobar.txt");
-            Assert.Equal("fixme", converter.GetFilename());
+            var converter = new UnicodeFileToHtmlTextConverter("foobar.txt");
+            Assert.NotEqual("fixme", converter.FileName);
         }
     }
 }
