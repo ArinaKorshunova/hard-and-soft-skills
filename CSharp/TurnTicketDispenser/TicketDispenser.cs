@@ -1,13 +1,10 @@
-namespace TDDMicroExercises.TurnTicketDispenser
-{
-    public class TicketDispenser
-    {
-        public TurnTicket GetTurnTicket()
-        {
-            int newTurnNumber = TurnNumberSequence.GetNextTurnNumber();
-            TurnTicket newTurnTicket = new TurnTicket(newTurnNumber);
+namespace TDDMicroExercises.TurnTicketDispenser;
 
-            return newTurnTicket;
-        }
+public class TicketDispenser
+{
+    public TurnTicket GetTurnTicket()
+    {
+        var newTurnNumber = TurnNumberSequence.GetNextTurnNumber();
+        return new TurnTicket(newTurnNumber);
     }
 }

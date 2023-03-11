@@ -1,17 +1,3 @@
-namespace TDDMicroExercises.TurnTicketDispenser
-{
-    public class TurnTicket
-    {
-        private readonly int _turnNumber;
+namespace TDDMicroExercises.TurnTicketDispenser;
 
-        public TurnTicket(int turnNumber)
-        {
-            _turnNumber = turnNumber;
-        }
-
-        public int TurnNumber
-        {
-            get { return _turnNumber; }
-        }
-    }
-}
+public record TurnTicket(int TurnNumber);
