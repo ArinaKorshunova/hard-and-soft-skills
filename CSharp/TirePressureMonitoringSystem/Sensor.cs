@@ -1,24 +1,19 @@
 using System;
 
-namespace TDDMicroExercises.TirePressureMonitoringSystem
+namespace TDDMicroExercises.TirePressureMonitoringSystem;
+
+public static class Sensor
 {
-    public class Sensor
+    private const double Offset = 16;
+
+    public static double PopNextPressurePsiValue()
     {
-        const double Offset = 16;
+        return Offset + SamplePressure();
+    }
 
-        public double PopNextPressurePsiValue()
-        {
-            double pressureTelemetryValue;
-            SamplePressure(out pressureTelemetryValue);
-
-            return Offset + pressureTelemetryValue;
-        }
-
-        private static void SamplePressure(out double pressureTelemetryValue)
-        {
-            // placeholder implementation that simulate a real sensor in a real tire
-            Random basicRandomNumbersGenerator = new Random();
-            pressureTelemetryValue = 6 * basicRandomNumbersGenerator.NextDouble() * basicRandomNumbersGenerator.NextDouble();
-        }
+    private static double SamplePressure()
+    {
+        var random = new Random();
+        return 6 * random.NextDouble() * random.NextDouble();
     }
 }

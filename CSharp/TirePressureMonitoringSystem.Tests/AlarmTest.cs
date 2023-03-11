@@ -1,11 +1,11 @@
 using Xunit;
 
-namespace TDDMicroExercises.TirePressureMonitoringSystem
+namespace TDDMicroExercises.TirePressureMonitoringSystem.Tests
 {
     public class AlarmTest
     {
         [Fact]
-        public void Foo()
+        public void AlarmShouldBeOff()
         {
             Alarm alarm = new Alarm();
             Assert.False(alarm.AlarmOn);
